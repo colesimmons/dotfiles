@@ -1,16 +1,5 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [Forget About Manual Configuration!](#forget-about-manual-configuration)
-- [Watch me run!](#watch-me-run)
+- [Screenshot](#screenshot)
 - [Installation](#installation)
-  - [Restoring Dotfiles](#restoring-dotfiles)
-- [3.x.x+ Upgrade Instructions!](#3xx-upgrade-instructions)
-- [Additional](#additional)
-  - [VIM as IDE](#vim-as-ide)
-  - [Crontab](#crontab)
-  - [Remap Caps-Lock](#remap-caps-lock)
 - [Settings](#settings)
   - [SSD-specific tweaks](#ssd-specific-tweaks)
   - [General System Changes](#general-system-changes)
@@ -19,9 +8,7 @@
   - [Configuring the Screen](#configuring-the-screen)
   - [Finder Configs](#finder-configs)
   - [Dock & Dashboard](#dock--dashboard)
-  - [Configuring Hot Corners](#configuring-hot-corners)
   - [Configuring Safari & WebKit](#configuring-safari--webkit)
-  - [Configuring Mail](#configuring-mail)
   - [Spotlight](#spotlight)
   - [iTerm2](#iterm2)
   - [Time Machine](#time-machine)
@@ -29,42 +16,17 @@
   - [Address Book, Dashboard, iCal, TextEdit, and Disk Utility](#address-book-dashboard-ical-textedit-and-disk-utility)
   - [Mac App Store](#mac-app-store)
   - [Messages](#messages)
-  - [SizeUp.app](#sizeupapp)
 - [Software Installation](#software-installation)
   - [Utilities](#utilities)
   - [Apps](#apps)
   - [NPM Global Modules](#npm-global-modules)
   - [Ruby Gems](#ruby-gems)
-- [License](#license)
-- [Contributions](#contributions)
-- [Loathing, Mehs and Praise](#loathing-mehs-and-praise)
-- [¯\\_(ツ)_/¯ Warning / Liability](#%C2%AF%5C%5C_%E3%83%84_%C2%AF-warning--liability)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Forget About Manual Configuration!
-
-Don't you hate getting a new laptop or joining a new team and then spending a whole day setting up your system preferences and tools? Me too. That's why we automate; we did it once and we don't want to do have to do it again.
-
-\\[^_^]/ - This started as [Adam Eivy](http://adameivy.com)'s MacOS shell configuration dotfiles but has grown to a multi-developer platform for machine configuration.
-
-When I finish with your machine, you will be able to look at your command-line in full-screen mode like this (running iTerm):
+# Screenshot 
 
 ![iTerm Screenshot](https://raw.githubusercontent.com/atomantic/dotfiles/master/img/term.png)
 
-Check out how your shell prompt includes the full path, node.js version & the working git branch along with a lot of other info!
-We use powerlevel9k for command prompt, so customization of what you want is easily changable in `./.zshrc`
-The top terminal is using vim + NerdTree as a full Atom replacement IDE.
-The bottom left two are git terminals.
-The bottom right is running `vtop`
-
 To launch fullscreen, hit `Command + Enter` in iTerm, then use `Command + d` and `Command + D` to create split panes.
-
-
-\\[._.]/ - I'm so excited I just binaried in my pants!
-
-# Watch me run!
-![Running](http://media.giphy.com/media/5xtDarwenxEoFeIMEM0/giphy.gif)
 
 # Installation
 
@@ -83,46 +45,14 @@ cd ~/.dotfiles;
 * When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
 * I've also found that you need to reboot before fast key repeat will be enabled
 
+* Remap Caps-Lock to ESC
+
+* Install BetterSnapTool
+
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
-
-## Restoring Dotfiles
-
-If you have existing dotfiles for configuring git, zsh, vim, etc, these will be backed-up into `~/.dotfiles_backup/$(date +"%Y.%m.%d.%H.%M.%S")` and replaced with the files from this project. You can restore your original dotfiles by using `./restore.sh $RESTOREDATE` where `$RESTOREDATE` is the date folder name you want to restore.
-
-> The restore script does not currently restore system settings--only your original dotfiles. To restore system settings, you'll need to manually undo what you don't like (so don't forget to fork, review, tweak)
-
-
-# 3.x.x+ Upgrade Instructions!
-
-`3.0.0` brings huge changes. If you have made any modifications (and didn't make your own fork), you will want to backup your dotfiles prior to running `git-up` or `git pull` on `~/.dotfiles`.
-
-Do the following to upgrade your ~/.dotfiles safely:
-
-1. backup your dotfiles: `cp -R ~/.dotfiles ~/.dotfiles_old`
-2. `cd ~/.dotfiles`
-3. update dotfiles: `git-up` or `git pull`
-4. remove old submodule location: `rm -rf .vim` (now lives in `homedir/.vim`)
-5. inspect `install.sh` and `config.js` to make sure all the software you want is installed
-6. inspect `homedir/*` for any changes you want to port from `./dotfiles_old`
-7. run `install.sh` again
-
-# Additional
-
-## VIM as IDE
-I am moving away from using `Atom` and instead using `vim` as my IDE. I use Vundle to manage vim plugins (instead of pathogen). Vundle is better in many ways and is compatible with pathogen plugins. Additionally, vundle will manage and install its own plugins so we don't have to use git submodules for all of them.
-
-## Crontab
-You can `cron ~/.crontab` if you want to add my nightly cron software updates.
-
-> \\[0_0]/ - Note that this may wake you in the morning to compatibility issues so use only if you like being on the edge
-
-## Remap Caps-Lock
-- I highly recommend remapping your Caps Lock key to Control per [Dr. Bunsen](http://www.drbunsen.org/remapping-caps-lock/):
-![Remap Caps Lock](https://raw.githubusercontent.com/atomantic/dotfiles/master/img/remap_capslock.png)
 
 # Settings
 This project changes a number of settings and configures software on MacOS.
-Here is the current list:
 
 ## Prompt Driven Configuration
 The following will only happen if you agree on the prompt
@@ -159,8 +89,6 @@ The following will only happen if you agree on the prompt
 - Reveal IP, hostname, OS, etc. when clicking clock in login window
 - Restart automatically if the computer freezes
 - Never go into computer sleep mode
-- Check for software updates daily, not just once per week
-- Disable smart quotes as they’re annoying when typing code
 - Disable smart dashes as they’re annoying when typing code
 
 ## Security
@@ -182,7 +110,6 @@ The following will only happen if you agree on the prompt
 - Disable press-and-hold for keys in favor of key repeat
 - Set a blazingly fast keyboard repeat rate:
 - Set language and text formats (english/US)
-- Disable auto-correct
 
 ## Configuring the Screen
 - Require password immediately after sleep or screen saver begins
@@ -237,11 +164,6 @@ The following will only happen if you agree on the prompt
 - Make Dock more transparent
 - Reset Launchpad, but keep the desktop wallpaper intact
 
-## Configuring Hot Corners
-- Top left screen corner → Mission Control
-- Top right screen corner → Desktop
-- Bottom right screen corner → Start screen saver
-
 ## Configuring Safari & WebKit
 - Set Safari’s home page to ‘about:blank’ for faster loading
 - Prevent Safari from opening ‘safe’ files automatically after downloading
@@ -254,14 +176,6 @@ The following will only happen if you agree on the prompt
 - Remove useless icons from Safari’s bookmarks bar
 - Enable the Develop menu and the Web Inspector in Safari
 - Add a context menu item for showing the Web Inspector in web views
-
-## Configuring Mail
-- Disable send and reply animations in Mail.app
-- Copy email addresses as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app
-- Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
-- Display emails in threaded mode, sorted by date (oldest at the top)
-- Disable inline attachments (just show the icons)
-- Disable automatic spell checking
 
 ## Spotlight
 - Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed
@@ -302,10 +216,6 @@ The following will only happen if you agree on the prompt
 - Disable automatic emoji substitution (i.e. use plain text smileys)
 - Disable smart quotes as it’s annoying for messages that contain code
 - Disable continuous spell checking
-
-## SizeUp.app
-- Start SizeUp at login
-- Don’t show the preferences window on next start
 
 # Software Installation
 
@@ -366,22 +276,3 @@ The following is the software that I have set as default:
 
 ## Ruby Gems
 * git-up
-
-# License
-This project is licensed under ISC. Please fork, contribute and share.
-
-# Contributions
-Contributions are always welcome in the form of pull requests with explanatory comments.
-
-Please refer to the [Contributor Covenant](https://github.com/atomantic/dotfiles/blob/master/CODE_OF_CONDUCT.md)
-
-# Loathing, Mehs and Praise
-1. Loathing should be directed into pull requests that make it better. woot.
-2. Bugs with the setup should be put as GitHub issues.
-3. Mehs should be > /dev/null
-4. Praise should be directed to ![@antic](https://img.shields.io/twitter/follow/antic.svg?style=social&label=@antic)
-
-
-# ¯\\_(ツ)_/¯ Warning / Liability
-> Warning:
-The creator of this repo is not responsible if your machine ends up in a state you are not happy with. If you are concerned, look at the code to review everything this will do to your machine :)
