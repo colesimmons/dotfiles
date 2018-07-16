@@ -47,7 +47,11 @@ cd ~/.dotfiles;
 
 * Remap Caps-Lock to ESC
 
-* Install BetterSnapTool
+Install:
+* Firefox
+* Chrome
+* Google Play desktop app
+* Better Snap tool
 
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
 
