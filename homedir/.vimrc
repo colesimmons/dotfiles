@@ -25,7 +25,13 @@ call vundle#begin()
 " Keep Plugin commands between vundle#begin/end.
 " let Vundle manage Vundle
 Plugin 'VundleVim/Vundle.vim'
-" Plugin 'Valloric/YouCompleteMe'
+
+" Autocomplete
+Plugin 'Valloric/YouCompleteMe'
+
+" Color scheme
+Plugin 'ajmwagar/vim-deus'
+
 " Navigation (IDE frame)
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -38,16 +44,17 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-surround'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'editorconfig/editorconfig-vim'
+
 " visual undo list
 Plugin 'sjl/gundo.vim'
-" Plugin 'majutsushi/tagbar'
-" markdown preview: opens browser with live reload when vim opens .md
-Plugin 'suan/vim-instant-markdown'
 Plugin 'godlygeek/tabular'
+
 " language tools
 Plugin 'scrooloose/syntastic'
 Plugin 'millermedeiros/vim-esformatter'
-Plugin 'digitaltoad/vim-pug'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mgechev/vim-jsx'
+
 " Plugin 'elzr/vim-json'
 " Plugin 'SirVer/ultisnips'
 "Plugin 'sheerun/vim-polyglot'
@@ -64,10 +71,7 @@ Plugin 'SuperTab'
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
-" TypeScript
-Plugin 'leafgarland/typescript-vim'
-" Vue.js
-Plugin 'posva/vim-vue'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -83,6 +87,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -306,3 +311,4 @@ let g:syntastic_pug_checkers = ['jade','pug']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:sneak#streak = 1
 let g:airline_theme='bubblegum'
+let g:jsx_ext_required = 0
