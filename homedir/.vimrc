@@ -1,17 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Must Have
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme solarized
-" syntax on " syntax highlighting on
-syntax enable
-let g:solarized_termtrans = 1
-call togglebg#map("<F5>")
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,8 +15,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
 
-" Color scheme
-Plugin 'ajmwagar/vim-deus'
+" Color
+Plugin 'morhetz/gruvbox'
 
 " Navigation (IDE frame)
 Plugin 'scrooloose/nerdtree'
@@ -46,38 +32,24 @@ Plugin 'dkprice/vim-easygrep'
 Plugin 'editorconfig/editorconfig-vim'
 
 " visual undo list
-Plugin 'sjl/gundo.vim'
 Plugin 'godlygeek/tabular'
 
 " language tools
 Plugin 'scrooloose/syntastic'
 Plugin 'millermedeiros/vim-esformatter'
-Plugin 'pangloss/vim-javascript'
 Plugin 'mgechev/vim-jsx'
+Plugin 'sheerun/vim-polyglot'
 
-" Plugin 'elzr/vim-json'
 " Plugin 'SirVer/ultisnips'
-"Plugin 'sheerun/vim-polyglot'
+
 " plugins from http://vim-scripts.org/vim/scripts.html
 Plugin 'node.js'
 Plugin 'SuperTab'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 "
 " Brief help
 " :PluginList       - lists configured plugins
@@ -102,6 +74,11 @@ set ffs=unix,dos,mac " support all three, in this order
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,# " none of these should be word dividers, so make them not be
 set nosol " leave my cursor where it was
+syntax on
+set t_Co=256
+set cursorline
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files/Backups/Sessions
@@ -310,5 +287,5 @@ let g:syntastic_pug_checkers = ['jade','pug']
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:sneak#streak = 1
-let g:airline_theme='bubblegum'
 let g:jsx_ext_required = 0
+let g:javascript_plugin_flow = 1
