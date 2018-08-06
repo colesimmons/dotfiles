@@ -8,7 +8,6 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Keep Plugin commands between vundle#begin/end.
 " let Vundle manage Vundle
 Plugin 'VundleVim/Vundle.vim'
 
@@ -35,19 +34,16 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
 
 " language tools
-Plugin 'scrooloose/syntastic'
 Plugin 'millermedeiros/vim-esformatter'
-Plugin 'mgechev/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 Plugin 'sheerun/vim-polyglot'
 
-" Plugin 'SirVer/ultisnips'
+" efficiency for writing JSX
+" ex: type div.test<Tab> for <div className="test"></div>
+" TODO: fix
+Plugin 'mattn/emmet-vim'
 
-" plugins from http://vim-scripts.org/vim/scripts.html
-Plugin 'node.js'
-Plugin 'SuperTab'
-
-
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 "
@@ -69,7 +65,6 @@ set fenc=utf-8
 set termencoding=utf-8
 set history=1000 " How many lines of history to remember
 set cf " enable error files and error jumping
-" set clipboard+=unnamed " turns out I do like sharing windows clipboard
 set ffs=unix,dos,mac " support all three, in this order
 set viminfo+=! " make sure it can save viminfo
 set isk+=_,$,@,%,# " none of these should be word dividers, so make them not be
@@ -102,7 +97,7 @@ set wildmode=list:longest " turn on wild menu in special format (long format)
 set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.swp,*.jpg,*.gif,*.png " ignore formats
 set ruler " Always show current positions along the bottom
 set cmdheight=1 " the command bar is 1 high
-set number " turn on line numbers
+set number relativenumber " turn on line numbers
 set lz " do not redraw while running macros (much faster) (LazyRedraw)
 set hid " you can change buffer without saving
 set backspace=2 " make backspace work normal
@@ -137,8 +132,7 @@ set softtabstop=2 " unify
 set shiftwidth=2 " unify
 set tabstop=2 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
-" wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
-set textwidth=120
+set textwidth=80
 filetype plugin indent on " load filetype plugins and indent settings
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -264,29 +258,19 @@ map ,n <plug>NERDTreeTabsToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_html_tidy_quiet_messages = { "level": "warnings" }
-let g:syntastic_html_tidy_ignore_errors = [ '<template> is not recognized!' ]
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_eslint_checker = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_enable_tslint_checker = 1
-let g:syntastic_typescript_checkers = ['tslint', 'tsc']
-let g:syntastic_enable_pug_checker = 1
-let g:syntastic_pug_checkers = ['jade','pug']
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:sneak#streak = 1
 let g:jsx_ext_required = 0
 let g:javascript_plugin_flow = 1
 let g:python_highlight_all = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Emmet
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
