@@ -39,31 +39,26 @@ module.exports = {
     'wget --enable-iri'
   ],
   cask: [
-    'gpgtools',
+    //'gpgtools',
+    'dashlane',
+    'firefox-developer-edition',
+    'flux',
+    'google-chrome',
     'ireadfast',
     'iterm2',
-    //'little-snitch',
-    'micro-snitch',
-    //'macvim',
+    'marshallofsound-google-play-music-player',
+    'nordvpn',
+    'postman',
+    'sketch',
     'slack',
+    'telegram',
     'the-unarchiver',
-    //'torbrowser',
     'transmission',
-    'vlc',
-  ],
-  gem: [
-    'git-up'
+    'vlc'
   ],
   npm: [
-    // 'eslint',
-    // 'instant-markdown-d',
-    // 'generator-dockerize',
-    'gulp',
     'npm-check',
-    'prettyjson',
     'trash',
-    'webpack',
     'vtop'
-    // ,'yo'
   ]
 };

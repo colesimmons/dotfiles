@@ -1,4 +1,3 @@
-- [Screenshot](#screenshot)
 - [Installation](#installation)
 - [Settings](#settings)
   - [SSD-specific tweaks](#ssd-specific-tweaks)
@@ -22,19 +21,7 @@
   - [NPM Global Modules](#npm-global-modules)
   - [Ruby Gems](#ruby-gems)
 
-# Screenshot
-
-![iTerm Screenshot](https://raw.githubusercontent.com/atomantic/dotfiles/master/img/term.png)
-
-To launch fullscreen, hit `Command + Enter` in iTerm, then use `Command + d` and `Command + D` to create split panes.
-
 # Installation
-
-> Note: I recommend forking this repo in case you don't like anything I do and want to set your own preferences (and pull request them!)
-
-> REVIEW WHAT THIS SCRIPT DOES PRIOR TO RUNNING: https://github.com/atomantic/dotfiles/blob/master/install.sh#L275-L1038
-> It's always a good idea to review arbitrary code from the internet before running it on your machine with sudo power!
-> You are responsible for everything this script does to your machine (see LICENSE)
 
 ```bash
 git clone --recurse-submodules https://github.com/atomantic/dotfiles ~/.dotfiles
@@ -42,28 +29,18 @@ cd ~/.dotfiles;
 # run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
 ./install.sh
 ```
+
 * When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
 * I've also found that you need to reboot before fast key repeat will be enabled
 
 * Remap Caps-Lock to ESC
 
 Install:
-* Firefox
-* Chrome
-* Google Play desktop app
 * Better Snap Tool
-* Dashlane
-* NordVPN
 * Popcorn Time
-* Telegram
-* Slack
 * Bettersnaptool
 * Fade In
 * Stoplight
-* Postman
-* Get rid of snitch (it has a trial)
-* Flux
-* Sketch
 
 * Disable alert sound
 
@@ -71,12 +48,6 @@ Install:
 
 # Settings
 This project changes a number of settings and configures software on MacOS.
-
-## Prompt Driven Configuration
-The following will only happen if you agree on the prompt
-- install a gitshots script to take a photo using your camera on every git commit (these go in as a post-commit hook to your .git_template)
-- overwrite your /etc/hosts file with a copy from someonewhocares.org (see ./configs/hosts for the file that will be used)
-- replace the system wallpaper with `img/wallpaper.jpg`
 
 ## SSD-specific tweaks
 - Disable local Time Machine snapshots
@@ -205,7 +176,7 @@ The following will only happen if you agree on the prompt
 - Installing the Solarized Dark theme for iTerm
 - Don’t display the annoying prompt when quitting iTerm
 - Hide tab title bars
-- Set system-wide hotkey to show/hide iterm with ctrl+tick ( `^` + `)
+- Set system-wide hotkey to show/hide iterm with ctrl+tick ( `^` + \`)
 - Set normal font to Hack 12pt
 - Set non-ascii font to Roboto Mono for Powerline 12pt
 
@@ -272,25 +243,23 @@ The following is the software that I have set as default:
 * wget --enable-iri
 
 ## Apps
-* box-sync
-* gpgtools
-* iterm2
-* sizeup
-* slack
-* the-unarchiver
-* xquartz
+* Dashlane
+* Firefox Developer Edition
+* Flux
+* Google Chrome
+* Google Play Music Desktop Player
+* ireadfast
+* ITerm2
+* NordVPN
+* Postman
+* Sketch
+* Slack
+* Telegram
+* The Unarchiver
+* Transmission
+* VLC
 
 ## NPM Global Modules
-
-* antic
-* buzzphrase
-* eslint
-* gulp
-* instant-markdown-d
 * npm-check
-* prettyjson
 * trash
 * vtop
-
-## Ruby Gems
-* git-up
