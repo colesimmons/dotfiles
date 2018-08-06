@@ -133,9 +133,9 @@ set laststatus=2 " always show the status line
 set ai " autoindent (filetype indenting instead)
 set nosi " smartindent (filetype indenting instead)
 set cindent " do c-style indenting
-set softtabstop=4 " unify
-set shiftwidth=4 " unify
-set tabstop=4 " real tabs should be 4, but they will show with set list on
+set softtabstop=2 " unify
+set shiftwidth=2 " unify
+set tabstop=2 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
 " wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
 set textwidth=120
@@ -289,3 +289,4 @@ let g:syntastic_pug_checkers = ['jade','pug']
 let g:sneak#streak = 1
 let g:jsx_ext_required = 0
 let g:javascript_plugin_flow = 1
+let g:python_highlight_all = 1

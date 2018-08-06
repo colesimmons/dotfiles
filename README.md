@@ -22,7 +22,7 @@
   - [NPM Global Modules](#npm-global-modules)
   - [Ruby Gems](#ruby-gems)
 
-# Screenshot 
+# Screenshot
 
 ![iTerm Screenshot](https://raw.githubusercontent.com/atomantic/dotfiles/master/img/term.png)
 
@@ -51,7 +51,21 @@ Install:
 * Firefox
 * Chrome
 * Google Play desktop app
-* Better Snap tool
+* Better Snap Tool
+* Dashlane
+* NordVPN
+* Popcorn Time
+* Telegram
+* Slack
+* Bettersnaptool
+* Fade In
+* Stoplight
+* Postman
+* Get rid of snitch (it has a trial)
+* Flux
+* Sketch
+
+* Disable alert sound
 
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
 
@@ -64,7 +78,7 @@ The following will only happen if you agree on the prompt
 - overwrite your /etc/hosts file with a copy from someonewhocares.org (see ./configs/hosts for the file that will be used)
 - replace the system wallpaper with `img/wallpaper.jpg`
 
-## SSD-specific tweaks  
+## SSD-specific tweaks
 - Disable local Time Machine snapshots
 - Disable hibernation (speeds up entering sleep mode)
 - Remove the sleep image file to save disk space

@@ -27,6 +27,8 @@ module.exports = {
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
+    'postgres',
+    'python3',
     'tmux',
     'tree',
     'ttyrec',
