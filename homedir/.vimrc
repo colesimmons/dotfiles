@@ -35,6 +35,7 @@ Plugin 'w0rp/ale'
 Plugin 'millermedeiros/vim-esformatter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'alexlafroscia/postcss-syntax.vim'
 
 " efficiency for writing JSX
 " ex: type div.test<Tab> for <div className="test"></div>
