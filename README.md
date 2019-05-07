@@ -29,14 +29,18 @@ cd ~/.dotfiles;
 ./install.sh
 ```
 
-TODO after:
-* When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
-* I've also found that you need to reboot before fast key repeat will be enabled
-* Remap Caps-Lock to ESC
-* Install BetterSnapTool and Stoplight
-* Disable alert sound
-
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
+
+TODO after:
+* When it finishes, open iTerm and press `Command & ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
+* Select the `SourceCodePro+Powerline+Awesome` font.
+* Reboot before fast key repeat will be enabled
+* Install BetterSnapTool and Stoplight
+* Remap Caps-Lock to ESC in System Preferences > Keyboard
+* Set Touch Bar to use "Expanded Control Strip" in System Preferences > Keyboard
+* Disable alert sound in System Preferences > Sound
+* Change default browser to Firefox in System Preferences > General
+
 
 # Settings
 This project changes a number of settings and configures software on MacOS.
