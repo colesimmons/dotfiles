@@ -61,6 +61,7 @@ module.exports = {
     'vlc',
     'zoom'
   ],
+  gem: [],
   npm: [
     'elm',
     'elm-test',
