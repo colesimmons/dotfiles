@@ -39,25 +39,32 @@ module.exports = {
     'wget --enable-iri'
   ],
   cask: [
-    //'gpgtools',
     'anki',
     'dashlane',
+    'docker',
     'firefox-developer-edition',
     'flux',
     'google-chrome',
+    'google-cloud-sdk',
     'ireadfast',
     'iterm2',
-    'marshallofsound-google-play-music-player',
     'nordvpn',
+    'oni',
     'postman',
     'sketch',
     'slack',
+    'tableplus',
     'telegram',
     'the-unarchiver',
     'transmission',
-    'vlc'
+    'vlc',
+    'zoom'
   ],
   npm: [
+    'elm',
+    'elm-test',
+    'elm-oracle',
+    'elm-format',
     'npm-check',
     'trash',
     'vtop'

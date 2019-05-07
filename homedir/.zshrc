@@ -58,7 +58,7 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export MAGICK_HOME=/usr/local/opt/imagemagick@6
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

@@ -13,6 +13,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Color
 Plugin 'morhetz/gruvbox'
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Navigation (IDE frame)
 Plugin 'scrooloose/nerdtree'
@@ -35,7 +36,10 @@ Plugin 'w0rp/ale'
 Plugin 'millermedeiros/vim-esformatter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-Plugin 'alexlafroscia/postcss-syntax.vim'
+Plugin 'stephenway/postcss.vim'
+Plugin 'vim-python/python-syntax'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'elmcast/elm-vim'
 
 " efficiency for writing JSX
 " ex: type div.test<Tab> for <div className="test"></div>

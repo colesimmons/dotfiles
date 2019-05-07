@@ -415,8 +415,8 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Clock.menu"
 ok
 
-running "Set highlight color to green"
-defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600";ok
+running "Set highlight color to purple-ish"
+defaults write NSGlobalDomain AppleHighlightColor -string "0.470 0.0392 1";ok
 
 running "Set sidebar icon size to medium"
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2;ok
@@ -772,7 +772,7 @@ defaults write com.apple.spotlight orderedItems -array \
   '{"enabled" = 1;"name" = "DIRECTORIES";}' \
   '{"enabled" = 1;"name" = "PDF";}' \
   '{"enabled" = 1;"name" = "FONTS";}' \
-  '{"enabled" = 0;"name" = "DOCUMENTS";}' \
+  '{"enabled" = 1;"name" = "DOCUMENTS";}' \
   '{"enabled" = 0;"name" = "MESSAGES";}' \
   '{"enabled" = 0;"name" = "CONTACT";}' \
   '{"enabled" = 0;"name" = "EVENT_TODO";}' \

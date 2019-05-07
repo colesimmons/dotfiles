@@ -36,10 +36,7 @@ cd ~/.dotfiles;
 * Remap Caps-Lock to ESC
 
 Install:
-* Better Snap Tool
-* Popcorn Time
-* Bettersnaptool
-* Fade In
+* BetterSnapTool
 * Stoplight
 
 * Disable alert sound
@@ -55,7 +52,6 @@ This project changes a number of settings and configures software on MacOS.
 - Remove the sleep image file to save disk space
 
 ## General System Changes
-- always boot in verbose mode (not MacOS GUI mode)
 - Disable the sound effects on boot
 - Menu bar: disable transparency
 - Menu bar: hide the Time Machine, Volume, User, and Bluetooth icons
@@ -244,22 +240,28 @@ The following is the software that I have set as default:
 
 ## Apps
 * Dashlane
+* Docker
 * Firefox Developer Edition
 * Flux
 * Google Chrome
-* Google Play Music Desktop Player
+* Google Cloud SDK
 * ireadfast
 * ITerm2
 * NordVPN
+* Oni
 * Postman
 * Sketch
 * Slack
+* Spotify
+* TablePlus
 * Telegram
 * The Unarchiver
 * Transmission
 * VLC
+* Zoom
 
 ## NPM Global Modules
 * npm-check
 * trash
 * vtop
+* elm
