@@ -35,11 +35,16 @@ TODO after:
 * When it finishes, open iTerm and press `Command & ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
 * Select the `SourceCodePro+Powerline+Awesome` font.
 * Reboot before fast key repeat will be enabled
-* Install BetterSnapTool and Stoplight
+* Install BetterSnapTool, Highland, Logic, Numbers, and Pages via App Store
 * Remap Caps-Lock to ESC in System Preferences > Keyboard
 * Set Touch Bar to use "Expanded Control Strip" in System Preferences > Keyboard
 * Disable alert sound in System Preferences > Sound
+* Disable "Automatically adjust brightness" in System Preferences > Display
+* Set desktop background in System Preferences > Desktop & Screen Saver
 * Change default browser to Firefox in System Preferences > General
+* Disable Messages notifications in System Preferences > Notifications
+* In Firefox, set "Home Content" settings, DuckDuckGo as default in "Search", set "Privacy and Security" options, allow Dashlane in private windows
+* Configure f.lux
 
 
 # Settings
