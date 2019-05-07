@@ -19,7 +19,6 @@
   - [Utilities](#utilities)
   - [Apps](#apps)
   - [NPM Global Modules](#npm-global-modules)
-  - [Ruby Gems](#ruby-gems)
 
 # Installation
 
@@ -30,15 +29,11 @@ cd ~/.dotfiles;
 ./install.sh
 ```
 
+TODO after:
 * When it finishes, open iTerm and press `Command + ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs` -- you may also need to select the `Hack` font and check the box for non-ascii font and set to `Roboto Mono For Powerline` (I've had mixed results for automating these settings--love a pull request that improves this)
 * I've also found that you need to reboot before fast key repeat will be enabled
-
 * Remap Caps-Lock to ESC
-
-Install:
-* BetterSnapTool
-* Stoplight
-
+* Install BetterSnapTool and Stoplight
 * Disable alert sound
 
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
@@ -227,6 +222,7 @@ The following is the software that I have set as default:
 * jq
 * mas
 * moreutils
+* neovim
 * nmap
 * openconnect
 * reattach-to-user-namespace
@@ -239,6 +235,7 @@ The following is the software that I have set as default:
 * wget --enable-iri
 
 ## Apps
+
 * Dashlane
 * Docker
 * Firefox Developer Edition

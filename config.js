@@ -22,6 +22,7 @@ module.exports = {
     'jq',
     // Install some other useful utilities like `sponge`
     'moreutils',
+    'neovim',
     'nmap',
     'openconnect',
     'reattach-to-user-namespace',
