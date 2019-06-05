@@ -62,3 +62,6 @@ if [ -f '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cs
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# added by travis gem
+[ -f /Users/colesimmons/.travis/travis.sh ] && source /Users/colesimmons/.travis/travis.sh

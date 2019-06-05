@@ -6,6 +6,7 @@ module.exports = {
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
     'coreutils',
     'dos2unix',
+    'elasticsearch',
     // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     'findutils',
     'fortune',
@@ -28,7 +29,7 @@ module.exports = {
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
-    'postgres',
+    'postgresql',
     'python3',
     'tmux',
     'tree',
@@ -37,7 +38,8 @@ module.exports = {
     'vim --with-override-system-vi',
     'watch',
     // Install wget with IRI support
-    'wget --enable-iri'
+    'wget --enable-iri',
+    'yarn'
   ],
   cask: [
     'anki',
@@ -47,6 +49,7 @@ module.exports = {
     'flux',
     'google-chrome',
     'google-cloud-sdk',
+    'homebrew/cask-versions/adoptopenjdk8',
     'ireadfast',
     'iterm2',
     'nordvpn',

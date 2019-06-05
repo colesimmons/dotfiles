@@ -34,6 +34,7 @@ cd ~/.dotfiles;
 TODO after:
 * When it finishes, open iTerm and press `Command & ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
 * Select the `SourceCodePro+Powerline+Awesome` font.
+* "Reuse previous session's directory" from iTerm > Profiles > General
 * Reboot before fast key repeat will be enabled
 * Install BetterSnapTool, Highland, Logic, Numbers, and Pages via App Store
 * Remap Caps-Lock to ESC in System Preferences > Keyboard
