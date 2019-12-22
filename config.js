@@ -39,7 +39,11 @@ module.exports = {
     'watch',
     // Install wget with IRI support
     'wget --enable-iri',
-    'yarn'
+    'yarn',
+    'openssl',
+    'sqlite3',
+    'xz',
+    'zlib'
   ],
   cask: [
     'anki',
@@ -53,19 +57,19 @@ module.exports = {
     'ireadfast',
     'iterm2',
     'nordvpn',
-    'oni',
     'postman',
     'sketch',
     'slack',
+    'spotify',
     'tableplus',
     'telegram',
     'the-unarchiver',
-    'transmission',
     'vlc',
     'zoom'
   ],
   gem: [],
   npm: [
+    'eslint',
     'elm',
     'elm-test',
     'elm-oracle',

@@ -33,7 +33,7 @@ cd ~/.dotfiles;
 
 TODO after:
 * When it finishes, open iTerm and press `Command & ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
-* Select the `SourceCodePro+Powerline+Awesome` font.
+* Select the `Roboto Mono` font for ASCII and `SourceCodePro+Powerline+Awesome` font for non-ASCII.
 * "Reuse previous session's directory" from iTerm > Profiles > General
 * Reboot before fast key repeat will be enabled
 * Install BetterSnapTool, Highland, Logic, Numbers, and Pages via App Store
@@ -46,6 +46,7 @@ TODO after:
 * Disable Messages notifications in System Preferences > Notifications
 * In Firefox, set "Home Content" settings, DuckDuckGo as default in "Search", set "Privacy and Security" options, allow Dashlane in private windows
 * Configure f.lux
+
 
 
 # Settings

@@ -134,6 +134,7 @@ set shiftwidth=2 " unify
 set tabstop=2 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
 set textwidth=80
+autocmd FileType elm setlocal softtabstop=4 shiftwidth=4 tabstop=4
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Formatting/Layout
