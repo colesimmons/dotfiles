@@ -1,28 +1,22 @@
 module.exports = {
   brew: [
-    // http://conqueringthecommandline.com/book/ack_ag
-    'ag',
-    // Install GNU core utilities (those that come with macOS are outdated)
+    'ag', // http://conqueringthecommandline.com/book/ack_ag
     // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-    'coreutils',
+    'coreutils', // Install GNU core utilities (those that come with macOS are outdated)
     'dos2unix',
     'elasticsearch',
-    // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
-    'findutils',
-    'fortune',
+    'findutils', // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     'readline', // ensure gawk gets good readline
     'gawk',
+
     // Install GNU `sed`, overwriting the built-in `sed`
     // so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
     'gnu-sed --with-default-names',
-    // better, more recent grep
-    'homebrew/dupes/grep',
-    // https://github.com/jkbrzt/httpie
-    'httpie',
-    // jq is a sort of JSON grep
-    'jq',
-    // Install some other useful utilities like `sponge`
-    'moreutils',
+
+    'homebrew/dupes/grep', // better, more recent grep
+    'httpie', // https://github.com/jkbrzt/httpie
+    'jq', // jq is a sort of JSON grep
+    'moreutils', // Install some other useful utilities like `sponge`
     'neovim',
     'nmap',
     'openconnect',
@@ -34,11 +28,9 @@ module.exports = {
     'tmux',
     'tree',
     'ttyrec',
-    // better, more recent vim
-    'vim --with-override-system-vi',
+    'vim --with-override-system-vi', // better, more recent vim
     'watch',
-    // Install wget with IRI support
-    'wget --enable-iri',
+    'wget --enable-iri', // Install wget with IRI support
     'yarn',
     'openssl',
     'sqlite3',
@@ -56,7 +48,7 @@ module.exports = {
     'homebrew/cask-versions/adoptopenjdk8',
     'ireadfast',
     'iterm2',
-    'nordvpn',
+    'mullvadvpn',
     'postman',
     'sketch',
     'slack',

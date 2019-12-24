@@ -218,12 +218,11 @@ The following is the software that I have set as default:
 
 ## Utilities
 
-* ack
 * ag
 * coreutils
 * dos2unix
+* elasticsearch
 * findutils
-* fortune
 * gawk
 * gifsicle
 * gnupg
@@ -249,6 +248,7 @@ The following is the software that I have set as default:
 
 ## Apps
 
+* Anki
 * Dashlane
 * Docker
 * Firefox Developer Edition
@@ -256,9 +256,8 @@ The following is the software that I have set as default:
 * Google Chrome
 * Google Cloud SDK
 * ireadfast
-* ITerm2
-* NordVPN
-* Oni
+* iTerm2
+* MullvadVPN
 * Postman
 * Sketch
 * Slack
@@ -266,11 +265,12 @@ The following is the software that I have set as default:
 * TablePlus
 * Telegram
 * The Unarchiver
-* Transmission
 * VLC
 * Zoom
 
 ## NPM Global Modules
+* eslint
+* elm toolkit
 * npm-check
 * trash
 * vtop
