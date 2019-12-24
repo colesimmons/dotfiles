@@ -23,7 +23,7 @@
 # Installation
 
 ```bash
-git clone --recurse-submodules https://github.com/atomantic/dotfiles ~/.dotfiles
+git clone --recurse-submodules https://github.com/colesimmons/dotfiles ~/.dotfiles
 cd ~/.dotfiles;
 # run this using terminal (not iTerm, lest iTerm settings get discarded on exit)
 ./install.sh
@@ -32,21 +32,23 @@ cd ~/.dotfiles;
 > Note: running install.sh is idempotent. You can run it again and again as you add new features or software to the scripts! I'll regularly add new configurations so keep an eye on this repo as it grows and optimizes.
 
 TODO after:
-* When it finishes, open iTerm and press `Command & ,` to open preferences. Under Profiles > Colors, select "Load Presets" and choose the `Solarized Dark Patch` scheme. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
-* Select the `Roboto Mono` font for ASCII and `SourceCodePro+Powerline+Awesome` font for non-ASCII.
-* "Reuse previous session's directory" from iTerm > Profiles > General
 * Reboot before fast key repeat will be enabled
-* Install BetterSnapTool, Highland, Logic, Numbers, and Pages via App Store
-* Remap Caps-Lock to ESC in System Preferences > Keyboard
-* Set Touch Bar to use "Expanded Control Strip" in System Preferences > Keyboard
-* Disable alert sound in System Preferences > Sound
-* Disable "Automatically adjust brightness" in System Preferences > Display
-* Set desktop background in System Preferences > Desktop & Screen Saver
-* Change default browser to Firefox in System Preferences > General
-* Disable Messages notifications in System Preferences > Notifications
-* In Firefox, set "Home Content" settings, DuckDuckGo as default in "Search", set "Privacy and Security" options, allow Dashlane in private windows
+* App Store > Install BetterSnapTool, Highland, Logic, Numbers, and Pages.
+* iTerm > Preferences > Profiles > Colors > "Load Presets" > `Solarized Dark Patch`. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
+* iTerm > Preferences > Profiles > General > "Reuse previous session's directory"
+* iTerm > Preferences > Profiles > General > Select the `Roboto Mono` font for ASCII and `SourceCodePro+Powerline+Awesome` font for non-ASCII.
+* System Preferences > Keyboard > Remap Caps-Lock to ESC
+* System Preferences > Keyboard > Set touch bar to use "Expanded Control Strip"
+* System Preferences > Sound > Disable alert sound
+* System Preferences > Display > Disable "Automatically adjust brightness"
+* System Preferences > Desktop & Screen Saver > Set desktop + disable screen saver
+* System Preferences > Energy Saver > Set timeouts
+* System Preferences > General > Set Firefox as default browser
+* System Preferences > Notifications > Disable all non-Slack notifications (esp Messages)
+* System Preferences > Mission Control > Disable hot corners
+* Firefox > Set "Home Content" settings, DuckDuckGo as default in "Search", set "Privacy and Security" options, allow Dashlane in private windows
+* Firefox > Install Redux, React, and Dashlane extensions
 * Configure f.lux
-
 
 
 # Settings
