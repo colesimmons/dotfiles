@@ -35,11 +35,12 @@ Plugin 'godlygeek/tabular'
 Plugin 'w0rp/ale'
 Plugin 'millermedeiros/vim-esformatter'
 Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'stephenway/postcss.vim'
 Plugin 'vim-python/python-syntax'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'elmcast/elm-vim'
+Plugin 'elixir-editors/vim-elixir'
 
 " efficiency for writing JSX
 " ex: type div.test<Tab> for <div className="test"></div>
@@ -133,7 +134,7 @@ set softtabstop=2 " unify
 set shiftwidth=2 " unify
 set tabstop=2 " real tabs should be 4, but they will show with set list on
 set copyindent " but above all -- follow the conventions laid before us
-set textwidth=80
+set textwidth=100
 autocmd FileType elm setlocal softtabstop=4 shiftwidth=4 tabstop=4
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

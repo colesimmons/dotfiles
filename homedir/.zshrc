@@ -65,3 +65,4 @@ if [ -f '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Us
 
 # added by travis gem
 [ -f /Users/colesimmons/.travis/travis.sh ] && source /Users/colesimmons/.travis/travis.sh
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"

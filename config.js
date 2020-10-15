@@ -5,6 +5,8 @@ module.exports = {
     'coreutils', // Install GNU core utilities (those that come with macOS are outdated)
     'dos2unix',
     'elasticsearch',
+    'elixir',
+    'erlang',
     'findutils', // Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
     'readline', // ensure gawk gets good readline
     'gawk',

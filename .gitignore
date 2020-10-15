@@ -6,6 +6,7 @@
 id_rsa
 node_modules
 homedir/.vim/backup/*
+homedir/.vim/view/*
 !homedir/.vim/backup/.gitignore
 homedir/.vim/temp/*
 !homedir/.vim/temp/.gitignore
