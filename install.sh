@@ -50,9 +50,32 @@ if [[ $? = 0 ]]; then
   fi
 fi
 
-# Add wallpaper to desktop pictures
-running "Set a custom wallpaper image"
-sudo cp ./img/wallpaper.jpg /Library/Desktop\ Pictures/;
+# ###########################################################
+# Install non-brew various tools (PRE-BREW Installs)
+# ###########################################################
+
+bot "ensuring build/install tools are available"
+if ! xcode-select --print-path &> /dev/null; then
+
+    # Prompt user to install the XCode Command Line Tools
+    xcode-select --install &> /dev/null
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Wait until the XCode Command Line Tools are installed
+    until xcode-select --print-path &> /dev/null; do
+        sleep 5
+    done
+
+    print_result $? ' XCode Command Line Tools Installed'
+
+    # Prompt user to agree to the terms of the Xcode license
+    # https://github.com/alrra/dotfiles/issues/10
+
+    sudo xcodebuild -license
+    print_result $? 'Agree with the XCode Command Line Tools licence'
+
+fi
 
 #####
 # install homebrew (CLI Packages)
@@ -67,42 +90,26 @@ if [[ $? != 0 ]]; then
     error "unable to install homebrew, script $0 abort!"
     exit 2
   fi
+  brew analytics off
 else
   ok
-  # Make sure we’re using the latest Homebrew
-  running "updating homebrew"
+  bot "Homebrew"
+  action "updating homebrew..."
   brew update
-  ok
-  bot "before installing brew packages, we can upgrade any outdated packages."
-  read -r -p "run brew upgrade? [y|N] " response
-  if [[ $response =~ ^(y|yes|Y) ]];then
-    # Upgrade any already-installed formulae
-    action "upgrade brew packages..."
-    brew upgrade
-    ok "brews updated..."
-  else
-    ok "skipped brew package upgrades.";
-  fi
+  ok "homebrew updated"
+  action "upgrading brew packages..."
+  brew upgrade
+  ok "brews upgraded"
 fi
 
-#####
-# install brew cask (UI Packages)
-#####
-running "checking brew-cask install"
-output=$(brew tap | grep cask)
-if [[ $? != 0 ]]; then
-  action "installing brew-cask"
-  require_brew caskroom/cask/brew-cask
-fi
-brew tap caskroom/versions > /dev/null 2>&1
-ok
+# Avoid a potential bug
+mkdir -p ~/Library/Caches/Homebrew/Formula
+brew doctor
 
-# skip those GUI clients, git command-line all the way
-require_brew git
-# need fontconfig to install/build fonts
-require_brew fontconfig
-# update zsh to latest
-require_brew zsh
+
+require_brew git        # skip those GUI clients, git command-line all the way
+require_brew fontconfig # need fontconfig to install/build fonts
+require_brew zsh        # update zsh to latest
 # update ruby to latest
 # use versions of packages installed with homebrew
 RUBY_CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline` --with-libyaml-dir=`brew --prefix libyaml`"
@@ -111,8 +118,6 @@ require_brew ruby
 CURRENTSHELL=$(dscl . -read /Users/$USER UserShell | awk '{print $2}')
 if [[ "$CURRENTSHELL" != "/usr/local/bin/zsh" ]]; then
   bot "setting newer homebrew zsh (/usr/local/bin/zsh) as your shell (password required)"
-  # sudo bash -c 'echo "/usr/local/bin/zsh" >> /etc/shells'
-  # chsh -s /usr/local/bin/zsh
   sudo dscl . -change /Users/$USER UserShell $SHELL /usr/local/bin/zsh > /dev/null 2>&1
   ok
 fi
@@ -125,6 +130,9 @@ if [[ ! -d "./oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 fi
 
+###
+# Dotfiles
+###
 bot "creating symlinks for project dotfiles..."
 pushd homedir > /dev/null 2>&1
 now=$(date +"%Y.%m.%d.%H.%M.%S")
@@ -150,14 +158,17 @@ done
 popd > /dev/null 2>&1
 
 
+###
+# Vim
+###
 bot "Installing vim plugins"
-# cmake is required to compile vim bundle YouCompleteMe
-# require_brew cmake
 vim +PluginInstall +qall > /dev/null 2>&1
+ok
 
 bot "installing fonts"
+require_brew fontconfig
 ./fonts/install.sh
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 require_cask font-fontawesome
 require_cask font-awesome-terminal-fonts
 require_cask font-hack
@@ -168,12 +179,6 @@ require_cask font-roboto-mono
 require_cask font-roboto-mono-for-powerline
 require_cask font-source-code-pro
 ok
-
-if [[ -d "/Library/Ruby/Gems/2.0.0" ]]; then
-  running "Fixing Ruby Gems Directory Permissions"
-  sudo chown -R $(whoami) /Library/Ruby/Gems/2.0.0
-  ok
-fi
 
 # node version manager
 require_brew nvm
@@ -200,7 +205,8 @@ node index.js
 ok
 
 running "cleanup homebrew"
-brew cleanup > /dev/null 2>&1
+brew cleanup --force > /dev/null 2>&1
+rm -f -r /Library/Caches/Homebrew/* > /dev/null 2>&1
 ok
 
 ###############################################################################
@@ -275,12 +281,6 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-running "Disable local Time Machine snapshots"
-sudo tmutil disablelocal;ok
-
-# running "Disable hibernation (speeds up entering sleep mode)"
-# sudo pmset -a hibernatemode 0;ok
-
 running "Remove the sleep image file to save disk space"
 sudo rm -rf /Private/var/vm/sleepimage;ok
 running "Create a zero-byte file instead"
@@ -288,32 +288,18 @@ sudo touch /Private/var/vm/sleepimage;ok
 running "…and make sure it can’t be rewritten"
 sudo chflags uchg /Private/var/vm/sleepimage;ok
 
-# running "Disable the sudden motion sensor as it’s not useful for SSDs"
-# sudo pmset -a sms 0;ok
-
 ################################################
 # Optional / Experimental                      #
 ################################################
 
-# running "Set computer name (as done via System Preferences → Sharing)"
-# sudo scutil --set ComputerName "antic"
-# sudo scutil --set HostName "antic"
-# sudo scutil --set LocalHostName "antic"
-# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "antic"
-
-# running "Disable Resume system-wide"
-# defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false;ok
-# TODO: might want to enable this again and set specific apps that this works great for
-# e.g. defaults write com.microsoft.word NSQuitAlwaysKeepsWindows -bool true
+echo "Setting system Label and Name..."
+sudo scutil --set ComputerName "cole's mbp"
+sudo scutil --set HostName "cole-mbp"
+sudo scutil --set LocalHostName "cole-mbp"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "cole-mbp"
 
 running "Stop iTunes from responding to the keyboard media keys"
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null;ok
-
-# running "Show icons for hard drives, servers, and removable media on the desktop"
-# defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-# defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-# defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-# defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true;ok
 
 running "Wipe all (default) app icons from the Dock"
 defaults write com.apple.dock persistent-apps -array "";ok
