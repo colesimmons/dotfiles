@@ -1,9 +1,10 @@
 module.exports = {
   brew: [
+    'svn', // For Abstract PDF Export
+    'autojump', // For Abstract PDF export
     'ag', // http://conqueringthecommandline.com/book/ack_ag
-    // Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+    'cairo', // For Abstract PDF export
     'coreutils', // Install GNU core utilities (those that come with macOS are outdated)
-    'dos2unix',
     'elasticsearch',
     'elixir',
     'erlang',
@@ -25,8 +26,9 @@ module.exports = {
     'reattach-to-user-namespace',
     // better/more recent version of screen
     'homebrew/dupes/screen',
+    'pango', // For Abstract PDF Export
     'postgresql',
-    'python3',
+    'python3.7',
     'tmux',
     'tree',
     'ttyrec',
@@ -68,6 +70,7 @@ module.exports = {
     'elm-test',
     'elm-oracle',
     'elm-format',
+    'firebase-tools',
     'npm-check',
     'trash',
     'vtop'

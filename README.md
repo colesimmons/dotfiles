@@ -38,8 +38,8 @@ TODO after:
 * iTerm > Preferences > Profiles > General > "Reuse previous session's directory"
 * iTerm > Preferences > Profiles > General > Select the `Roboto Mono` font for ASCII and `SourceCodePro+Powerline+Awesome` font for non-ASCII.
 * System Preferences > Keyboard > Remap Caps-Lock to ESC
-* System Preferences > Keyboard > Set touch bar to use "Expanded Control Strip"
-* System Preferences > Sound > Disable alert sound
+* System Preferences > Keyboard > Set touch bar to use "Expanded Control Strip" - TODO
+* System Preferences > Sound > Disable alert sound - TODO
 * System Preferences > Display > Disable "Automatically adjust brightness"
 * System Preferences > Desktop & Screen Saver > Set desktop + disable screen saver
 * System Preferences > Energy Saver > Set timeouts
@@ -48,7 +48,10 @@ TODO after:
 * System Preferences > Mission Control > Disable hot corners
 * Firefox > Set "Home Content" settings, DuckDuckGo as default in "Search", set "Privacy and Security" options, allow Dashlane in private windows
 * Firefox > Install Redux, React, and Dashlane extensions
+* Set up BetterSnapTool
 * Configure f.lux
+* Install Google Cloud SDK (https://cloud.google.com/sdk/docs/install)
+* brew services start postgresql
 
 
 # Settings

@@ -1,6 +1,7 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.dotfiles/oh-my-zsh
 
+ZSH_DISABLE_COMPFIX=true
 export ZSH_THEME="powerlevel9k/powerlevel9k"
 # if you want to use this, change your non-ascii font to Droid Sans Mono for Awesome
 POWERLEVEL9K_MODE='awesome-patched'
@@ -57,12 +58,13 @@ unsetopt correct
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export MAGICK_HOME=/usr/local/opt/imagemagick@6
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cs/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cs/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 # added by travis gem
 [ -f /Users/colesimmons/.travis/travis.sh ] && source /Users/colesimmons/.travis/travis.sh
 export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+export PATH="/usr/local/opt/python@3.7/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/colesimmons/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/colesimmons/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/colesimmons/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/colesimmons/google-cloud-sdk/completion.zsh.inc'; fi
