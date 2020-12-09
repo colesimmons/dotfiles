@@ -14,9 +14,9 @@ module.exports = {
 
     // Install GNU `sed`, overwriting the built-in `sed`
     // so we can do "sed -i 's/foo/bar/' file" instead of "sed -i '' 's/foo/bar/' file"
-    'gnu-sed --with-default-names',
+    'gnu-sed',
 
-    'homebrew/dupes/grep', // better, more recent grep
+    'homebrew/core/grep', // better, more recent grep
     'httpie', // https://github.com/jkbrzt/httpie
     'jq', // jq is a sort of JSON grep
     'moreutils', // Install some other useful utilities like `sponge`
@@ -24,17 +24,16 @@ module.exports = {
     'nmap',
     'openconnect',
     'reattach-to-user-namespace',
-    // better/more recent version of screen
-    'homebrew/dupes/screen',
+    'homebrew/core/screen', // better/more recent version of screen
     'pango', // For Abstract PDF Export
     'postgresql',
-    'python3.7',
+    'python@3.7',
     'tmux',
     'tree',
     'ttyrec',
-    'vim --with-override-system-vi', // better, more recent vim
+    'vim', // better, more recent vim
     'watch',
-    'wget --enable-iri', // Install wget with IRI support
+    'wget',
     'yarn',
     'openssl',
     'sqlite3',
@@ -63,7 +62,6 @@ module.exports = {
     'vlc',
     'zoom'
   ],
-  gem: [],
   npm: [
     'eslint',
     'elm',
