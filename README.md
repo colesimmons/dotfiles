@@ -34,18 +34,15 @@ cd ~/.dotfiles;
 TODO after:
 * Reboot before fast key repeat will be enabled
 * App Store > Install BetterSnapTool, Highland, Logic, Numbers, and Pages.
-* iTerm > Preferences > Profiles > Colors > "Load Presets" > `Solarized Dark Patch`. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
 * iTerm > Preferences > Profiles > General > "Reuse previous session's directory"
-* iTerm > Preferences > Profiles > General > Select the `Roboto Mono` font for ASCII and `SourceCodePro+Powerline+Awesome` font for non-ASCII.
+* iTerm > Preferences > Profiles > Colors > "Load Presets" > `Solarized Dark Patch`. If it isn't there for some reason, import it from `~/.dotfiles/configs`.
+* iTerm > Preferences > Profiles > Text > Select the `Roboto Mono` font for ASCII and `SourceCodePro+Powerline+Awesome` font for non-ASCII.
 * System Preferences > Keyboard > Remap Caps-Lock to ESC
-* System Preferences > Keyboard > Set touch bar to use "Expanded Control Strip" - TODO
-* System Preferences > Sound > Disable alert sound - TODO
 * System Preferences > Display > Disable "Automatically adjust brightness"
 * System Preferences > Desktop & Screen Saver > Set desktop + disable screen saver
 * System Preferences > Energy Saver > Set timeouts
 * System Preferences > General > Set Firefox as default browser
 * System Preferences > Notifications > Disable all non-Slack notifications (esp Messages)
-* System Preferences > Mission Control > Disable hot corners
 * Firefox > Set "Home Content" settings, DuckDuckGo as default in "Search", set "Privacy and Security" options, allow Dashlane in private windows
 * Firefox > Install Redux, React, and Dashlane extensions
 * Set up BetterSnapTool
