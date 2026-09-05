@@ -1,8 +1,105 @@
-# Select command-line tools deliberately. Comment-only files install nothing.
-# Syntax example (inactive): brew "ripgrep"
+# CLI tools to install via Homebrew
+# Fish and Starship already belong to Brewfile.shell.
 
-# TODO: GitHub authentication tools and everyday command-line utilities.
-# Fish and Starship are selected in Brewfile.shell.
-# TODO: Choose runtime ownership (mise, uv, or alternatives) before adding tools.
-# TODO: Add container, database, and deployment tools only for active workflows.
-# Keep project runtime versions and project dependencies in their project repos.
+# ---------------------------------------------------------------------------------------
+# everyday dev
+# ---------------------------------------------------------------------------------------
+brew "git"              # Git (maintain independently of Apple's developer tools)
+brew "gh"               # GitHub
+brew "neovim"           # Neovim; works with the retained v/vim aliases
+brew "ripgrep"          # rg: one default code-search tool instead of ack and ag
+brew "fd"               # Friendly file discovery
+brew "jq"               # JSON inspection and transformations
+
+# ---------------------------------------------------------------------------------------
+# runtime managers
+# ---------------------------------------------------------------------------------------
+brew "uv"               # Python versions, environments, packages, and isolated CLI tools
+# Prefer uv over a parallel pyenv + pipx + global Python setup.
+brew "pixi"             # Project environments requiring Conda packages/native dependencies
+# Use Pixi only where uv's Python/PyPI workflow does not cover the project.
+brew "mise"             # Node/pnpm and other non-Python project runtimes
+# Prefer mise over a parallel fnm + Homebrew Node/Elixir/Erlang/Java setup.
+# Homebrew's mise package activates itself in Fish; do not add a duplicate hook.
+# Do not enable the legacy fnm integration alongside mise.
+
+# ---------------------------------------------------------------------------------------
+# maintaining these dotfiles
+# ---------------------------------------------------------------------------------------
+brew "shellcheck"       # Check Bash scripts; it does not lint Fish
+brew "shfmt"            # Format shell scripts; keep the Bash 3.2 compatibility target
+
+# ---------------------------------------------------------------------------------------
+# conveniences
+# ---------------------------------------------------------------------------------------
+brew "fzf"              # Interactive fuzzy selection; Fish keybindings are opt-in
+brew "bat"              # Read files with highlighting; do not globally replace cat
+brew "git-delta"        # Readable Git diffs; Git pager setup is a separate choice
+brew "zoxide"           # Jump to frequent directories; needs Fish initialization
+
+# ---------------------------------------------------------------------------------------
+# file browsing, inspection, and transfer
+# ---------------------------------------------------------------------------------------
+brew "eza"              # Rich directory listings; no need to replace system ls
+brew "btop"             # Interactive process and resource monitor
+brew "dust"             # See which directories use disk space
+brew "yq"               # Mike Farah's YAML processor, not the python-yq wrapper
+brew "sevenzip"         # Upstream 7-Zip CLI (7zz); prefer for new use over p7zip
+brew "rsync"            # File synchronization when the bundled version is insufficient
+
+# ---------------------------------------------------------------------------------------
+# Git stuff
+# ---------------------------------------------------------------------------------------
+brew "git-lfs"          # Large File Storage; its Git initialization is a separate step
+brew "git-filter-repo"  # History rewriting when needed; prefer over adding BFG too
+brew "gnupg"            # Only for an OpenPGP requirement; do not choose signing by accident
+
+# ---------------------------------------------------------------------------------------
+# publishing, PDFs, and media
+# ---------------------------------------------------------------------------------------
+brew "pandoc"           # Document format conversion
+brew "poppler"          # PDF text extraction and rendering; do not also select xpdf
+brew "typst"            # Typesetting for projects that use Typst
+brew "typstyle"         # Typst formatting
+brew "ffmpeg"           # Audio/video processing
+brew "imagemagick"      # Image processing
+# brew "tesseract"        # OCR; additional language data is a separate selection
+# Do not list codecs, font libraries, or image libraries pulled in by these tools.
+# MacTeX remains an application-manifest candidate for projects requiring TeX.
+
+# ---------------------------------------------------------------------------------------
+# additional language workflows
+# ---------------------------------------------------------------------------------------
+brew "cmake"            # Native projects that require CMake
+brew "pkgconf"          # Native dependency discovery (pkg-config)
+# Keep Ruff, type checkers, Jupyter/marimo, TypeScript, Tailwind, and language servers
+# in project dependencies or editor-managed environments with appropriate versions.
+
+# ---------------------------------------------------------------------------------------
+# local containers (one engine; no automatic startup)
+# ---------------------------------------------------------------------------------------
+brew "colima"           # Linux VM and container engine for macOS
+brew "docker"           # Docker client; this package alone does not run containers
+brew "docker-compose"   # Compose plugin; configure Docker's plugin discovery afterward
+brew "docker-buildx"    # BuildKit plugin; configure plugin discovery afterward
+
+# ---------------------------------------------------------------------------------------
+# database clients (without installing background database servers)
+# ---------------------------------------------------------------------------------------
+brew "libpq"            # PostgreSQL client tools including psql; keg-only
+brew "mysql-client"     # MySQL client tools; keg-only
+brew "sqlite"           # SQLite tools when a project needs more than macOS supplies
+# Client PATH configuration is separate. Select server versions per project.
+
+# ---------------------------------------------------------------------------------------
+# remote sessions and services
+# ---------------------------------------------------------------------------------------
+brew "tmux"             # Persistent terminal sessions, especially on remote hosts
+# brew "flyctl"           # Fly.io
+# cask "gcloud-cli"       # Google Cloud CLI; installs its own Homebrew Python dependency
+
+# ---------------------------------------------------------------------------------------
+# AI CLIs
+# ---------------------------------------------------------------------------------------
+cask "codex"            # Codex CLI, separate from the desktop application
+cask "claude-code"      # Claude Code

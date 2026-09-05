@@ -9,7 +9,8 @@ configuration. Each script runs independently; there is no master installer.
 - The prerequisite installers and Brewfile installers are implemented.
 - Fish, Starship, iTerm2, Ghostty, cmux, and the selected terminal fonts are included.
 - Fish, Starship, and terminal configuration are managed through symlinks.
-- General application and CLI-tool lists are empty; remaining preferences are placeholders.
+- Application candidates and curated CLI recommendations are listed for review;
+  remaining preferences and runtime configuration are placeholders.
 
 ## Set up a fresh Mac
 
@@ -177,10 +178,25 @@ when you are ready to install more software:
 - [config/Brewfile.cli-tools](config/Brewfile.cli-tools): selected command-line
   utilities and runtime managers.
 
-Each file contains inactive examples and prompts for undecided categories. A file
-containing only comments or blank lines installs nothing and reports that no packages
-have been selected. Keep entries declarative: package selections, without shell hooks
-or automatic service startup.
+The applications manifest groups verified cask candidates by purpose. Uncomment only
+the apps you want to reinstall; the inventory is not an automatic selection of this
+Mac's installed software. It also records apps without a matching official cask and
+apps managed by another installer. The CLI-tools manifest separates a recommended
+core from optional workflows, with all entries commented out for review. See
+[CLI recommendations](docs/cli-tools.md) for the reasoning, runtime ownership, and
+configuration still needed after installation.
+
+A file containing only comments or blank lines installs nothing and reports that no
+packages have been selected. Keep entries declarative: package selections, without
+shell hooks or automatic service startup. Casks select the available release; they
+do not preserve the source machine's application versions or license entitlements.
+
+Review larger installers such as Anaconda, MacTeX, and Creative Cloud before enabling
+them. Anaconda affects runtime ownership; MacTeX already includes the listed TeX GUI
+apps; Creative Cloud still requires selecting and installing Lightroom afterward.
+App Store purchases, iOS apps running on Mac, and game-library restoration remain
+separate manual choices. Cask names and availability can be checked in the
+[official Homebrew cask catalog](https://formulae.brew.sh/cask/).
 
 Run these scripts in either order, one at a time:
 

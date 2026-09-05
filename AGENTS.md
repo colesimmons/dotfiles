@@ -30,8 +30,14 @@ change. Public HTTPS cloning must work before GitHub authentication or SSH setup
 
 Additional application selections, Git identity and signing, runtime ownership,
 additional settings restoration, and macOS preferences remain undecided until chosen.
-Mise and uv are candidates, not approved package selections. Prefer project-owned
-runtime versions over a large set of global installations.
+`Brewfile.applications` contains commented, verified cask candidates grouped by purpose,
+plus notes on unmatched apps and bundled components. An inventory request does not
+make every installed app a fresh-install selection; activate entries when selected.
+`Brewfile.cli-tools` is a curated recommendation list, also commented out for review.
+The proposed runtime split is uv for Python, mise for Node and other non-Python
+runtimes, and rustup for Rust when needed. Pixi is an optional Conda-workflow exception.
+These are recommendations until selected; configuration stages remain placeholders.
+Prefer project-owned runtime versions over a large set of global installations.
 
 ## Repository map
 
@@ -54,11 +60,16 @@ runtime versions over a large set of global installations.
 - `lib/fish.sh`: Fish discovery and account-shell operations.
 - `config/Brewfile.*`: deliberate package selections. Comments and blank lines mean
   no selection. Keep these declarative; avoid hooks and automatic service startup.
+  Match application identity and distribution channel, not just its display name.
+  Verify cask availability and deprecation against Homebrew's official catalog; keep
+  terminals in their early manifest, and avoid duplicate suite components or helpers.
 - `lib/common.sh`: shared prerequisite checks, Homebrew discovery, and Bundle behavior.
 - `lib/ui.sh`: shared terminal styling, friendly error handling, and tool-output passthrough.
 - `tests/`: isolated behavior checks using temporary fixtures and fake commands.
 - `README.md`: public description, fresh-Mac instructions, script order, and manual
   finish checklist.
+- `docs/cli-tools.md`: CLI recommendations, runtime ownership, tradeoffs, and pending
+  package-specific configuration. Keep it aligned with the CLI manifest.
 
 ## Implementation conventions
 
@@ -105,6 +116,11 @@ plugin state. Put durable choices in `.fish` files. Private server shortcuts liv
 ignored `fish/local.fish`; do not import the source machine's IP addresses or credentials.
 The optional fnm and rustup integrations are guarded and do not select those tools for
 installation. Starship startup is interactive-only and its helper paths must be portable.
+If mise is selected, account for Homebrew's automatic Fish activation and retire the
+fnm hook instead of activating two Node managers. Homebrew rustup needs separate PATH
+and toolchain setup; do not assume the existing Cargo environment hook initializes it.
+Avoid listing transitive libraries or project development dependencies as global CLI
+selections. Keep one installation channel per AI CLI; casks can contain CLI binaries.
 
 Preserve helper behavior deliberately: `gwt` validates its argument and roots worktrees
 at the project root; `gwtr` removes only a worktree, without forcing removal or deleting

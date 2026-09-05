@@ -1,13 +1,135 @@
-# Select applications deliberately. Comment-only files install nothing.
-# Use cask entries for GUI applications; verify package names before adding them.
-# Syntax example (inactive): cask "firefox"
+# Applications to install via Homebrew
+# See more at https://formulae.brew.sh/cask/<token>
+# iTerm2, Ghostty, cmux, and terminal fonts belong in Brewfile.terminals.
 
-# TODO: Primary password manager and browser.
-# The three terminals and their fonts are selected in Brewfile.terminals.
-# TODO: Primary editor.
-# TODO: Daily email, calendar, tasks, notes, communication, and AI applications.
-# TODO: Launcher, window management, and other chosen conveniences.
-# TODO: Decide which research, publishing, design, and personal apps belong in
-#       separate optional manifests and focused 11-install-*.sh scripts.
-# TODO: If App Store apps are selected, add a separate stage that explicitly
-#       requires mas and an interactive App Store sign-in.
+# ---------------------------------------------------------------------------------------
+# Passwords and VPN
+# ---------------------------------------------------------------------------------------
+cask "proton-pass"                 # Proton Pass
+cask "protonvpn"                   # ProtonVPN
+
+# ---------------------------------------------------------------------------------------
+# Browsers
+# ---------------------------------------------------------------------------------------
+# cask "arc"                       # Arc
+cask "firefox@developer-edition"   # Firefox Developer Edition
+# cask "google-chrome"             # Google Chrome
+cask "mullvad-browser"             # Mullvad Browser
+cask "orion"                       # Orion
+
+# ---------------------------------------------------------------------------------------
+# Mail
+# ---------------------------------------------------------------------------------------
+cask "fastmail"                    # Fastmail
+cask "proton-mail"                 # Proton Mail
+
+# ---------------------------------------------------------------------------------------
+# Communication and meetings
+# ---------------------------------------------------------------------------------------
+cask "discord"                     # Discord
+cask "microsoft-teams"             # Microsoft Teams
+cask "slack"                       # Slack
+cask "telegram"                    # Native Telegram for macOS (not Telegram Desktop)
+cask "whatsapp"                    # WhatsApp
+cask "zoom"                        # zoom.us
+
+# ---------------------------------------------------------------------------------------
+# AI assistants
+# ---------------------------------------------------------------------------------------
+cask "chatgpt"                     # ChatGPT(/Codex)
+
+# ---------------------------------------------------------------------------------------
+# Editors and developer applications
+# ---------------------------------------------------------------------------------------
+cask "insomnia"                    # Insomnia
+cask "tableplus"                   # TablePlus
+cask "zed"                         # Zed
+
+# ---------------------------------------------------------------------------------------
+# Notes, projects, and bookmarks
+# ---------------------------------------------------------------------------------------
+cask "obsidian"                    # Obsidian
+cask "raindropio"                  # Raindrop.io
+
+# ---------------------------------------------------------------------------------------
+# Mac utilities and hardware
+# ---------------------------------------------------------------------------------------
+cask "daisydisk"                   # DaisyDisk
+cask "domzilla-caffeine"           # Caffeine (net.domzilla.caffeine, not cask "caffeine")
+cask "logi-options+"               # Logi Options+ and its supporting services
+# cask "moom"                      # Moom; review licensing for the available major version
+cask "raycast"                     # Raycast
+# cask "voiceink"                  # VoiceInk
+
+# ---------------------------------------------------------------------------------------
+# Reading, writing, and research
+# ---------------------------------------------------------------------------------------
+cask "anki"                        # Anki
+# cask "scrivener"                 # Scrivener
+cask "skim"                        # Skim
+cask "zotero"                      # Zotero
+
+# ---------------------------------------------------------------------------------------
+# Design and graphics
+# ---------------------------------------------------------------------------------------
+cask "blender"                     # Blender
+cask "figma"                       # Figma
+# cask "inkscape"                  # Inkscape
+cask "nucleo"                      # Nucleo
+cask "upscayl"                     # Upscayl
+
+# ---------------------------------------------------------------------------------------
+# Microsoft Office applications (individual apps, without adding the whole suite)
+# ---------------------------------------------------------------------------------------
+cask "microsoft-excel"             # Microsoft Excel
+cask "microsoft-outlook"           # Microsoft Outlook
+cask "microsoft-powerpoint"        # Microsoft PowerPoint
+cask "microsoft-word"              # Microsoft Word
+
+# ---------------------------------------------------------------------------------------
+# Games
+# ---------------------------------------------------------------------------------------
+# cask "steam"                    # Steam; restore purchased games through the client
+
+# ---------------------------------------------------------------------------------------
+# Larger installers: review their scope before enabling
+# ---------------------------------------------------------------------------------------
+# cask "adobe-creative-cloud"     # Creative Cloud; install Lightroom through Adobe afterward
+# cask "anaconda"                 # Full Anaconda distribution, including Navigator
+# Anaconda selects a Python environment; leave it off until runtime ownership is decided.
+
+# ---------------------------------------------------------------------------------------
+# TeX: choose the complete distribution OR the standalone GUI apps below.
+# ---------------------------------------------------------------------------------------
+# cask "mactex"                   # TeX Live plus BibDesk, LaTeXiT, TeX Live Utility, TeXShop, hintview
+# https://www.tug.org/mactex/whatsinthepackage.html
+# Standalone GUI alternatives; these do not provide a complete TeX toolchain:
+# cask "bibdesk"                  # BibDesk
+# cask "latexit"                  # LaTeXiT
+# cask "tex-live-utility"         # TeX Live Utility
+# cask "texshop"                  # TeXShop
+# No standalone hintview cask was found; it is included in MacTeX's GUI applications.
+
+# ---------------------------------------------------------------------------------------
+# No matching cask in the official Homebrew catalog
+# ---------------------------------------------------------------------------------------
+# App Store applications: Amazon Kindle, Canary Mail, Goodnotes, Keynote,
+# Numbers, Pages, and Things 3. Keep these for a separate App Store stage.
+# Proton Authenticator and Sequel are iOS app wrappers; no matching casks were found.
+# Sequel is not the Sequel Ace database client. Things Helper is not Things 3.
+# Research: no verified public cask; do not substitute Roam Research.
+# Microsoft Defender Shim: no matching cask; restore through its vendor if selected.
+# Authy Desktop: discontinued, with no current cask. Do not add an obsolete installer.
+# https://help.twilio.com/articles/22771146070299-End-user-guide-End-of-Life-EOL-for-Twilio-Authy-Desktop-app
+
+# ---------------------------------------------------------------------------------------
+# Managed elsewhere, not separate application selections
+# ---------------------------------------------------------------------------------------
+# Safari and macOS utilities come with macOS.
+# Lightroom and Adobe's helpers/installers/uninstallers belong to Creative Cloud.
+# Logitech helpers and drivers belong to Logi Options+; Proton Mail's uninstaller
+# belongs to Proton Mail. Do not select these supporting bundles separately.
+# Claude Code URL Handler belongs to the Claude Code CLI setup, if that is selected.
+# Baldur's Gate 3, Factorio, Hades II, and Civilization VI have local game launchers;
+# restore the games through their original store/client rather than copying launchers.
+# Add App Store automation only after mas and interactive sign-in are defined.
