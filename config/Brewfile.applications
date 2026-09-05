@@ -1,0 +1,13 @@
+# Select applications deliberately. Comment-only files install nothing.
+# Use cask entries for GUI applications; verify package names before adding them.
+# Syntax example (inactive): cask "firefox"
+
+# TODO: Primary password manager and browser.
+# TODO: Primary terminal and editor.
+# TODO: Daily email, calendar, tasks, notes, communication, and AI applications.
+# TODO: Launcher, window management, and other chosen conveniences.
+# TODO: Decide which research, publishing, design, and personal apps belong in
+#       separate optional manifests and focused 20-install-*.sh scripts.
+# TODO: If App Store apps are selected, add a separate stage that explicitly
+#       requires mas and an interactive App Store sign-in.
+
