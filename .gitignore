@@ -1,3 +1,11 @@
 .DS_Store
 .local/
 __pycache__/
+
+# Fish persists universal variables beside its config; these are machine state.
+/dotfiles/fish/fish_variables*
+/dotfiles/fish/fish_history
+/dotfiles/fish/local.fish
+/dotfiles/fish/conf.d/*.local.fish
+# Local exports and caches must not become public configuration by accident.
+/dotfiles/**/.DS_Store

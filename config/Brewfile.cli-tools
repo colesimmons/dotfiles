@@ -2,8 +2,7 @@
 # Syntax example (inactive): brew "ripgrep"
 
 # TODO: GitHub authentication tools and everyday command-line utilities.
-# TODO: Choose a shell if the macOS default is not desired.
+# Fish and Starship are selected in Brewfile.shell.
 # TODO: Choose runtime ownership (mise, uv, or alternatives) before adding tools.
 # TODO: Add container, database, and deployment tools only for active workflows.
 # Keep project runtime versions and project dependencies in their project repos.
-

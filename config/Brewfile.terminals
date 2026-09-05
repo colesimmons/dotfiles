@@ -1,0 +1,8 @@
+# Install these first so the rest of setup can happen in your preferred terminal.
+cask "iterm2"
+cask "ghostty"
+cask "cmux"
+
+# Fonts used by the checked-in iTerm2 and Ghostty configurations.
+cask "font-monaspace"
+cask "font-meslo-for-powerlevel10k"

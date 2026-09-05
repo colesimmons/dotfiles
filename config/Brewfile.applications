@@ -3,11 +3,11 @@
 # Syntax example (inactive): cask "firefox"
 
 # TODO: Primary password manager and browser.
-# TODO: Primary terminal and editor.
+# The three terminals and their fonts are selected in Brewfile.terminals.
+# TODO: Primary editor.
 # TODO: Daily email, calendar, tasks, notes, communication, and AI applications.
 # TODO: Launcher, window management, and other chosen conveniences.
 # TODO: Decide which research, publishing, design, and personal apps belong in
-#       separate optional manifests and focused 20-install-*.sh scripts.
+#       separate optional manifests and focused 11-install-*.sh scripts.
 # TODO: If App Store apps are selected, add a separate stage that explicitly
 #       requires mas and an interactive App Store sign-in.
-

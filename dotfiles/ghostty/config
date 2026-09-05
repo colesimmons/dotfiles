@@ -1,0 +1,8 @@
+# Shared by Ghostty and cmux. The launcher does not rely on the GUI app's PATH.
+command = /bin/sh -c 'exec "$HOME/.local/bin/dotfiles-fish"'
+shell-integration = fish
+
+font-family = MesloLGS NF
+adjust-cell-height = 30%
+theme = Gruvbox Dark
+keybind = cmd+r=prompt_surface_title

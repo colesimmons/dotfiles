@@ -40,5 +40,5 @@ run_tool 'Homebrew is installed, but it could not start.' \
   "Check Homebrew's message above and repair that installation before continuing." \
   "$DOTFILES_BREW" --version
 ui success 'Homebrew is ready. Cheers!'
-ui next 'Pick your apps and tools in config/Brewfile.*, then run the two 20-install scripts.'
-ui detail 'The scripts can find Homebrew already. For interactive use, follow its shellenv instructions.'
+ui next 'Start with 11-install-terminals.sh and 11-install-shell-tools.sh, then link your dotfiles at step 12.'
+ui detail 'The scripts can find Homebrew already. Your linked Fish configuration will set up its PATH.'

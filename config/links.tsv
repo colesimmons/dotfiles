@@ -1,0 +1,9 @@
+# Source under dotfiles<TAB>destination base (home/config)<TAB>relative destination
+fish	config	fish
+starship.toml	config	starship.toml
+starship	config	starship
+ghostty	config	ghostty
+ghostty	home	Library/Application Support/com.mitchellh.ghostty
+cmux	home	.config/cmux
+iterm2/profiles	home	Library/Application Support/iTerm2/DynamicProfiles
+bin/dotfiles-fish	home	.local/bin/dotfiles-fish

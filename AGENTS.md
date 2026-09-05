@@ -23,9 +23,13 @@ change. Public HTTPS cloning must work before GitHub authentication or SSH setup
 - Use Homebrew and curated Brewfiles for selected applications and CLI tools.
 - Keep routine setup distinct from upgrading or removing existing software.
 - Scaffold undecided choices instead of silently choosing applications or preferences.
+- Fish is the interactive and login shell. Install it with Starship, and install all
+  three requested terminals (iTerm2, Ghostty, cmux) immediately after Homebrew.
+- Reviewed dotfiles live under `dotfiles/` and are symlinked to their normal locations.
+  Edits should update the checkout directly; do not add copy-based settings deployment.
 
-Application selections, shell choice, Git identity and signing, runtime ownership,
-settings restoration, and macOS preferences remain undecided until explicitly chosen.
+Additional application selections, Git identity and signing, runtime ownership,
+additional settings restoration, and macOS preferences remain undecided until chosen.
 Mise and uv are candidates, not approved package selections. Prefer project-owned
 runtime versions over a large set of global installations.
 
@@ -34,10 +38,20 @@ runtime versions over a large set of global installations.
 - `scripts/00-*`: independent operations requiring only basic macOS setup. The tools
   installer can run before cloning; the preferences placeholder runs from a checkout.
 - `scripts/10-*`: Homebrew installation after usable Apple developer tools exist.
-- `scripts/20-*`: independent package manifests requiring Homebrew.
-- `scripts/30-*`: configuration after selected stage `20` apps and tools are installed.
+- `scripts/11-*`: independent package manifests requiring Homebrew. The recommended
+  path installs terminals and shell tools first; general apps and CLI tools can wait.
+- `scripts/12-link-dotfiles.sh`: syntax checks and conflict-aware symlinks after Fish
+  is installed. Supports previews and explicit backups outside the repository.
+- `scripts/13-set-default-shell.sh`: register Fish and change the real account shell
+  after the managed links exist. Must not act on a staged test home.
+- `scripts/14-open-terminal.sh`: open one selected terminal after the early setup.
+- `scripts/30-*`: configuration after selected optional stage `11` apps and tools are installed.
   These scripts must not assume another `30-*` script has initialized the shell.
-- `scripts/40-verify.sh`: checks implemented prerequisites and populated manifests.
+- `scripts/40-verify.sh`: checks prerequisites, manifests, managed links, and the login shell.
+- `dotfiles/`: reviewed Fish, Starship, and terminal settings plus the portable Fish launcher.
+- `config/links.tsv`: source, base (`home` or `config`), and destination, separated by tabs.
+- `lib/dotfiles.sh`: link traversal, preflight checks, previews, and explicit backups.
+- `lib/fish.sh`: Fish discovery and account-shell operations.
 - `config/Brewfile.*`: deliberate package selections. Comments and blank lines mean
   no selection. Keep these declarative; avoid hooks and automatic service startup.
 - `lib/common.sh`: shared prerequisite checks, Homebrew discovery, and Bundle behavior.
@@ -71,6 +85,35 @@ runtime versions over a large set of global installations.
 - Never commit credentials, tokens, private keys, recovery codes, machine dumps, or
   private app exports. Keep machine-specific values outside tracked files; `.local/`
   is ignored but is not automatically read by the scripts.
+
+## Maintain the managed dotfiles
+
+Keep configuration in the repo and point applications to it with symlinks. Prefer
+directory links when applications or editors replace files while saving. The two
+Ghostty directories deliberately share a source; iTerm2 uses a rewritable dynamic
+profile instead of checking in its entire preferences database. Link additional
+reviewed files through `config/links.tsv` and document their destinations in the README.
+
+Preflight all links before mutation. Refuse existing files, directories, and unrelated
+or broken symlinks by default; `--backup-existing` saves them under XDG state before
+linking. Never back up private configuration into the public repository. Each mutation
+inside a conditionally called Bash helper needs explicit failure handling, because
+`set -e` can be disabled by the caller's conditional context.
+
+Do not check in Fish's universal variables, histories, migration snapshots, or generated
+plugin state. Put durable choices in `.fish` files. Private server shortcuts live in
+ignored `fish/local.fish`; do not import the source machine's IP addresses or credentials.
+The optional fnm and rustup integrations are guarded and do not select those tools for
+installation. Starship startup is interactive-only and its helper paths must be portable.
+
+Preserve helper behavior deliberately: `gwt` validates its argument and roots worktrees
+at the project root; `gwtr` removes only a worktree, without forcing removal or deleting
+the branch. Shell choice does not change the setup scripts' Bash interpreter.
+
+`DOTFILES_TARGET_HOME` exists for isolated link staging and tests. Never repurpose
+`HOME` for testing. System account-shell changes and app launches must reject staging
+overrides. Test `sudo`, `chsh`, `dscl`, and app opening with stubs; do not apply setup
+to the development host just to validate it.
 
 ## Design the terminal experience
 
@@ -133,6 +176,12 @@ validation passed based only on mocked tests. Report the actual validation and i
 Review both `README.md` and `AGENTS.md` with every change. Update them in the same change
 when script names, numbering, prerequisites, behavior, chosen tools, manual actions,
 verification, or development conventions change. Keep the script-order table accurate.
+Keep a rerun label on each numbered README step and every script in the order table:
+`✅ Idempotent – safe to re-run` or `❌ Do not re-run`. Base labels on the implemented
+behavior, and reassess them when placeholders gain functionality. Explain exceptions
+beside the step: cloning is skipped after completion, and launching a terminal can
+repeat UI actions while leaving setup configuration unchanged. A green placeholder
+label must not imply that its configuration has been implemented.
 Replace resolved decisions and implemented-placeholder descriptions rather than
 appending contradictory notes. Avoid documenting transient inventories or test counts.
 

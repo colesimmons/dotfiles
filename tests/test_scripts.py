@@ -17,10 +17,10 @@ REPOSITORY = Path(__file__).resolve().parents[1]
 
 class SyntaxTests(unittest.TestCase):
     def test_builtin_bash_parses_all_shell_files(self):
-        for folder in ("scripts", "lib"):
-            for script in sorted((REPOSITORY / folder).glob("*.sh")):
-                with self.subTest(script=script.name):
-                    subprocess.run(["/bin/bash", "-n", str(script)], check=True)
+        scripts = list(REPOSITORY.rglob("*.sh")) + [REPOSITORY / "dotfiles/bin/dotfiles-fish"]
+        for script in sorted(scripts):
+            with self.subTest(script=script.name):
+                subprocess.run(["/bin/bash", "-n", str(script)], check=True)
 
 
 @unittest.skipIf(os.geteuid() == 0, "Installer scripts deliberately reject root")
@@ -31,7 +31,7 @@ class ScriptTests(unittest.TestCase):
         self.directory = Path(self.temporary.name)
         self.checkout = self.directory / "checkout with spaces"
         self.checkout.mkdir()
-        for folder in ("scripts", "lib", "config"):
+        for folder in ("scripts", "lib", "config", "dotfiles"):
             shutil.copytree(REPOSITORY / folder, self.checkout / folder)
         self.bin = self.directory / "bin"
         self.bin.mkdir()
@@ -40,10 +40,12 @@ class ScriptTests(unittest.TestCase):
         # Exclude the host's Homebrew and user tools; the fake architecture below
         # also prevents fallback to either of the real Homebrew prefixes.
         self.env = {
+            "HOME": os.environ["HOME"],
             "PATH": str(self.bin) + ":/usr/bin:/bin:/usr/sbin:/sbin",
             "TMPDIR": str(self.directory),
             "TEST_LOG": str(self.log),
             "TEST_BIN": str(self.bin),
+            "DOTFILES_TARGET_HOME": str(self.directory / "home"),
             "TEST_CLT": "1",
             "TEST_PLATFORM": "Darwin",
             "TEST_ARCH": "fixture-architecture",
@@ -85,6 +87,7 @@ set -eu
 printf 'brew:%s;auto_update=%s;cleanup=%s\\n' "$*" "${HOMEBREW_NO_AUTO_UPDATE:-}" "${HOMEBREW_NO_INSTALL_CLEANUP:-}" >> "$TEST_LOG"
 case "$1" in
   --version) echo 'Homebrew fixture' ;;
+  --prefix) echo "$TEST_BIN/.." ;;
   bundle)
     case "$2" in
       check)
@@ -102,6 +105,16 @@ case "$1" in
 esac
 """)
         self.env["TEST_BREW_SOURCE"] = str(self.brew_source)
+        self.stub("fish", "exit 0")
+        self.stub("dscl", 'echo "UserShell: $TEST_BIN/../bin/fish"')
+        for line in (self.checkout / "config" / "links.tsv").read_text().splitlines():
+            if not line or line.startswith("#"):
+                continue
+            source, base, relative = line.split("\t")
+            home = self.directory / "home"
+            target = (home / ".config" if base == "config" else home) / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.symlink_to(self.checkout / "dotfiles" / source)
         self.stub("curl", """
 echo 'curl:download' >> "$TEST_LOG"
 if [[ "$TEST_DOWNLOAD" != success ]]; then
@@ -138,8 +151,8 @@ INSTALLER
         shutil.copyfile(self.brew_source, self.bin / "brew")
         (self.bin / "brew").chmod(0o755)
 
-    def run_script(self, name, expected=0, terminal=False):
-        command = ["/bin/bash", str(self.checkout / "scripts" / name)]
+    def run_script(self, name, expected=0, terminal=False, args=()):
+        command = ["/bin/bash", str(self.checkout / "scripts" / name), *args]
         if terminal:
             master, slave = pty.openpty()
             process = None
@@ -277,12 +290,63 @@ INSTALLER
         self.assert_no_installer_temps()
 
     def test_package_stages_require_brew(self):
-        self.run_script("20-install-applications.sh", expected=1)
+        self.run_script("11-install-applications.sh", expected=1)
         self.assertEqual(self.log.read_text(), "")
+
+    def test_early_package_stages_use_their_separate_manifests(self):
+        self.install_fake_brew()
+        for script, category in (("11-install-terminals.sh", "terminals"),
+                                 ("11-install-shell-tools.sh", "shell")):
+            self.run_script(script)
+            manifest = self.checkout / "config" / ("Brewfile." + category)
+            self.assertIn("bundle install --file=" + str(manifest), self.log.read_text())
+
+    def test_link_stage_previews_applies_and_rejects_invalid_fish_before_changes(self):
+        self.install_fake_brew()
+        home = Path(self.env["DOTFILES_TARGET_HOME"])
+        shutil.rmtree(home)
+        self.run_script("12-link-dotfiles.sh", args=("--dry-run",))
+        self.assertFalse(home.exists())
+        self.stub("fish", "echo 'fish: invalid syntax in fixture' >&2; exit 7")
+        output = self.run_script("12-link-dotfiles.sh", expected=7)
+        self.assertIn("fish: invalid syntax", output)
+        self.assertFalse(home.exists())
+        self.stub("fish", "exit 0")
+        self.run_script("12-link-dotfiles.sh")
+        self.assertTrue((home / ".config/fish").is_symlink())
+        self.run_script("12-link-dotfiles.sh")
+        self.assertEqual(list(self.directory.glob("dotfiles-fish-check*")), [])
+
+    def test_account_and_terminal_stages_reject_a_staged_home(self):
+        self.install_fake_brew()
+        for command in ("sudo", "chsh", "open"):
+            self.stub(command, 'echo "UNEXPECTED side effect" >> "$TEST_LOG"; exit 9')
+        self.run_script("13-set-default-shell.sh", expected=1)
+        self.run_script("14-open-terminal.sh", expected=1, args=("ghostty",))
+        self.assertNotIn("UNEXPECTED", self.log.read_text())
+
+    def test_terminal_launch_waits_for_fish_then_opens_only_the_chosen_app(self):
+        self.install_fake_brew()
+        # Use only a temporary config link for this launch fixture. No account
+        # or real home files are changed, and app opening is always a stub.
+        self.env["XDG_CONFIG_HOME"] = str(Path(self.env["DOTFILES_TARGET_HOME"]) / ".config")
+        self.env["DOTFILES_TARGET_HOME"] = os.environ["HOME"]
+        (self.checkout / "config/links.tsv").write_text("fish\tconfig\tfish\n")
+        self.stub("open", 'printf "open:%s\\n" "$*" >> "$TEST_LOG"')
+        self.stub("dscl", 'echo "UserShell: /bin/zsh"')
+        self.run_script("14-open-terminal.sh", expected=1, args=("ghostty",))
+        self.assertNotIn("open:", self.log.read_text())
+        self.stub("dscl", 'echo "UserShell: $TEST_BIN/../bin/fish"')
+        for choice, application in (("iterm2", "iTerm"), ("ghostty", "Ghostty"), ("cmux", "cmux")):
+            self.run_script("14-open-terminal.sh", args=(choice,))
+            self.assertIn("open:-a " + application + "\n", self.log.read_text())
+        self.stub("open", "echo 'open: application not found by fixture' >&2; exit 4")
+        output = self.run_script("14-open-terminal.sh", expected=4, args=("cmux",))
+        self.assertIn("application not found", output)
 
     def test_empty_manifests_do_not_call_brew(self):
         self.install_fake_brew()
-        for name in ("20-install-applications.sh", "20-install-cli-tools.sh"):
+        for name in ("11-install-applications.sh", "11-install-cli-tools.sh"):
             self.assertIn("Nothing to install yet", self.run_script(name))
         self.assertEqual(self.log.read_text(), "")
 
@@ -292,7 +356,7 @@ INSTALLER
             manifest = self.checkout / "config" / ("Brewfile." + category)
             manifest.write_text('brew "fixture-package"\n')
         for category in ("cli-tools", "applications"):
-            self.run_script("20-install-" + category + ".sh")
+            self.run_script("11-install-" + category + ".sh")
             manifest = self.checkout / "config" / ("Brewfile." + category)
             self.assertIn(
                 "brew:bundle install --file=" + str(manifest)
@@ -305,7 +369,7 @@ INSTALLER
         self.install_fake_brew()
         (self.checkout / "config" / "Brewfile.applications").write_text('cask "fixture-app"\n')
         self.env["TEST_BUNDLE_INSTALL"] = "9"
-        output = self.run_script("20-install-applications.sh", expected=9)
+        output = self.run_script("11-install-applications.sh", expected=9)
         self.assertIn("Homebrew: fixture-package could not be downloaded.", output)
         self.assertIn("rerun this step", output)
         self.assertNotIn("Your selected applications are ready", output)
@@ -313,7 +377,7 @@ INSTALLER
     def test_missing_manifest_is_not_treated_as_empty(self):
         self.install_fake_brew()
         (self.checkout / "config" / "Brewfile.applications").unlink()
-        output = self.run_script("20-install-applications.sh", expected=1)
+        output = self.run_script("11-install-applications.sh", expected=1)
         self.assertIn("package list is missing", output)
         self.assertEqual(self.log.read_text(), "")
 
@@ -330,13 +394,13 @@ INSTALLER
         self.env["TEST_BUNDLE_CHECK"] = "1"
         output = self.run_script("40-verify.sh", expected=1)
         self.assertIn("Homebrew: fixture-package needs to be installed.", output)
-        self.assertIn("20-install-applications.sh", output)
-        self.assertIn("20-install-cli-tools.sh", output)
+        self.assertIn("11-install-applications.sh", output)
+        self.assertIn("11-install-cli-tools.sh", output)
         self.assertNotIn("automated checks look good", output)
         commands = self.log.read_text()
-        self.assertEqual(commands.count("bundle check"), 2)
+        self.assertEqual(commands.count("bundle check"), 4)
         self.assertNotIn("bundle install", commands)
-        self.assertEqual(commands.count("--no-upgrade;auto_update=1"), 2)
+        self.assertEqual(commands.count("--no-upgrade;auto_update=1"), 4)
 
     def test_verification_reports_all_missing_prerequisites(self):
         self.env["TEST_CLT"] = "0"

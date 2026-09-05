@@ -1,0 +1,13 @@
+#!/bin/bash
+# A stable command for GUI terminals, even before their inherited PATH is refreshed.
+set -euo pipefail
+case "$(uname -m)" in
+  arm64) fish_binary=/opt/homebrew/bin/fish ;;
+  x86_64) fish_binary=/usr/local/bin/fish ;;
+  *) printf 'This Fish launcher supports macOS on Apple Silicon or Intel.\n' >&2; exit 1 ;;
+esac
+if [[ ! -x "$fish_binary" ]]; then
+  printf 'Fish is not installed yet. Run 11-install-shell-tools.sh from the dotfiles repo.\n' >&2
+  exit 1
+fi
+exec "$fish_binary" --login "$@"
